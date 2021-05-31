@@ -40,10 +40,10 @@ class UserController extends Controller
     {
         if ($request -> isMethod('post')) {
             $validator = Validator::make($request->all(),[
-                'name'=>'required|min:6|max:30|alpha',
-                'email'=>'required|email',
-                'username'=>'required|min:6|max:30|alpha',
-                'password'=>'required|min:6|max:30',
+                'name'=>'required|min:6|max:255|alpha',
+                'email'=>'required|email|max:255',
+                'username'=>'required|min:6|max:255|alpha',
+                'password'=>'required|min:8|max:255',
                 'avatar'=>'required|image|mimes:jpg,jpeg,png,gif|mimetypes:image/jpg,image/jpeg,image/png,image/gif|max:10000',
             ]);
             if ($validator->fails()) {
@@ -85,7 +85,8 @@ class UserController extends Controller
      */
     public function show()
     {
-        return view('admin.user.show');
+        $data = User::paginate(5);
+        return view('admin.user.list_users',['users'=>$data]);
     }
 
     /**

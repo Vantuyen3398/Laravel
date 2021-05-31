@@ -20,5 +20,5 @@ Route::get('/', function () {
 Route::prefix('admin')->group(function() {
 	Route::get('user/create', [UserController::class, 'create'])->name('admin.user.create');
 	Route::post('user/create', [UserController::class, 'store'])->name('admin.user.store');
-	Route::get('user/show', [UserController::class, 'show'])->name('admin.user.show');
+	Route::get('user/list_users', [UserController::class, 'show'])->name('admin.user.show');
 });

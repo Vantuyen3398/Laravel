@@ -7,7 +7,7 @@
                 <strong>{{session('message')}}</strong>
             </span>
         @endif
-    	<form id="contactform" action="{{route('admin.user.store')}}" method="post"> 
+    	<form id="contactform" action="{{route('admin.user.store')}}" method="post" enctype="multipart/form-data"> 
     		@csrf
     		<p class="contact"><label for="name">Name</label></p> 
     		<input id="name" name="name" placeholder="First and last name"  tabindex="1" type="text"><br> 
