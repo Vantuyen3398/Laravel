@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Backend;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 
@@ -42,10 +41,10 @@ class UserController extends Controller
         if ($request -> isMethod('post')) {
             $validator = Validator::make($request->all(),[
                 'name'=>'required|min:6|max:30|alpha',
-                'emai'=>'required|email',
+                'email'=>'required|email',
                 'username'=>'required|min:6|max:30|alpha',
                 'password'=>'required|min:6|max:30',
-                // 'avatar'=>'required|mimes:.jpg,.jpeg,.png,.gif|max:10000',
+                'avatar'=>'required|image|mimes:jpg,jpeg,png,gif|mimetypes:image/jpg,image/jpeg,image/png,image/gif|max:10000',
             ]);
             if ($validator->fails()) {
                 return redirect()->back()
@@ -54,26 +53,26 @@ class UserController extends Controller
             }
             if ($request->hasFile('avatar')) {
                 $file = $request->file('avatar');
-                $destination_Path = public_path('images/avatar');
+                $destination_Path = public_path('backend/images/avatar');
                 $file_name = time().'_'.$file->getClientOriginalName(); 
                 $file->move($destination_Path, $file_name);
             } else {
                 $file_name = 'noname.jpg';
             }
             $user = DB::table('users')->where('email', $request->email)->first();
-            if (!($user)) {
+            if (!$user) {
                 $newUser = new User();
                 $newUser->name = $request->name;
                 $newUser->email = $request->email;
                 $newUser->username = $request->username;
                 $newUser->password = $request->password;
                 $newUser->birthday = $request->birthday;
-                $newUser->avatar = $request->$file_name;
+                $newUser->avatar = $file_name;
                 $newUser->role = $request->role;
-                $newUser -> save();
+                $newUser->save();
                 return redirect()->route('admin.user.create')->with('message','Add User SuccessFully!');
             } else {
-                return redirect()->route('admin.user.create')->with('message','Add User Not SuccessFully!');
+                return redirect()->route('admin.user.create')->with('message','Your Email existed, User can not be created');
             }
         }
     }
@@ -84,9 +83,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        return view('admin.user.show');
     }
 
     /**

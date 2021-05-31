@@ -7,6 +7,7 @@
 	<link rel="shortcut icon" href="{{asset('/backend/images/icon.png')}}">
 	<link rel="stylesheet" href="{{asset('/backend/css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('/backend/css/form.css')}}">
+	<link rel="stylesheet" href="{{asset('/backend/css/table.css')}}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
 </head>
 <body>
@@ -18,7 +19,7 @@
 						<div class="menu_left">
 						    <ul>
 						        <a href = ""><li>Home</li></a>
-						        <a href = ""><li>List User</li></a>
+						        <a href = "{{route('admin.user.show')}}"><li>List User</li></a>
 						        <a href = ""><li>Add Categories</li></a>
 						        <a href = ""><li>Add Product</li></a>
 						        <a href = ""><li>List Product</li></a>
