@@ -97,7 +97,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = User::find($id);
+        return view('admin.user.edit',['data'=>$data]);
     }
 
     /**
@@ -107,9 +108,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $data = User::find($request->id);
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->username = $request->username;
+        $data->save();
+        return redirect()->route('admin.user.show')->with('message','Update User SuccessFully!');;
     }
 
     /**
@@ -120,6 +126,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = User::find($id);
+        $data->delete();
+        return redirect()->route('admin.user.show');
     }
 }

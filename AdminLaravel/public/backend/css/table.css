@@ -36,3 +36,22 @@
 p.text-sm{
     display: none;
 }
+.btn {
+    width: 80px;
+    height: 30px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.btn-info {
+    background: lightblue;
+    margin-bottom: 3px;
+}
+.btn-danger {
+    background: #FF3333;
+    margin-top: 3px;
+}
+.btn:hover{
+    cursor: pointer;
+}

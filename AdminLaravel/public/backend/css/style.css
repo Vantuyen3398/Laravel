@@ -2,6 +2,15 @@
 			width: 100%;
 			margin: 0 auto;
 		}
+		header{
+			height: 100px;
+		}
+		.admin_content{
+			height: 700px;
+		}
+		footer{
+			height: 100px;
+		}
 		.col{
 			display: flex;
 			justify-content: space-between;

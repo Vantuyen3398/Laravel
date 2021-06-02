@@ -20,6 +20,7 @@
 						    <ul>
 						        <a href = ""><li>Home</li></a>
 						        <a href = "{{route('admin.user.show')}}"><li>List User</li></a>
+						        <a href = "{{route('admin.user.update', ['id'])}}"><li>Update User</li></a>
 						        <a href = ""><li>Add Categories</li></a>
 						        <a href = ""><li>Add Product</li></a>
 						        <a href = ""><li>List Product</li></a>
@@ -37,7 +38,7 @@
 			</div>
 		</section>
 	</header>
-	<section>
+	<section class="admin_content">
 		@yield('admin_content')
 	</section>
 	<footer>
