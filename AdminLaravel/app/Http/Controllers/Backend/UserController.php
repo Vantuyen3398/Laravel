@@ -110,12 +110,40 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $data = User::find($request->id);
-        $data->name = $request->name;
-        $data->email = $request->email;
-        $data->username = $request->username;
-        $data->save();
-        return redirect()->route('admin.user.show')->with('message','Update User SuccessFully!');;
+        if ($request -> isMethod('post')) {
+            $validator = Validator::make($request->all(), [
+                'name'=>'required|min:6|max:255|alpha',
+                'email'=>'required|email|max:255',
+                'username'=>'required|min:6|max:255|alpha',
+                'avatar'=>'image|mimes:jpg,jpeg,png,gif|mimetypes:image/jpg,image/jpeg,image/png,image/gif|max:10000',
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()
+                                 ->withErrors($validator)
+                                 ->withInput();
+            }
+            if ($request->hasFile('avatar')) {
+                $file = $request->file('avatar');
+                $destination_Path = public_path('backend/images/avatar');
+                $file_name = time().'_'.$file->getClientOriginalName();
+                $file->move($destination_Path, $file_name);
+                
+                $data = User::find($request->id);
+                $data->name = $request->name;
+                $data->email = $request->email;
+                $data->username = $request->username;
+                $data->avatar = $file_name;
+                $data->save();
+                return redirect()->route('admin.user.show')->with('message','Update User SuccessFully!');
+            } else {
+                $data = User::find($request->id);
+                $data->name = $request->name;
+                $data->email = $request->email;
+                $data->username = $request->username;
+                $data->save();
+                return redirect()->route('admin.user.show')->with('message', 'Update User SuccessFully!');
+            }
+        }
     }
 
     /**

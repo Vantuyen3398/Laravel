@@ -21,9 +21,10 @@
 						        <a href = ""><li>Home</li></a>
 						        <a href = "{{route('admin.user.show')}}"><li>List User</li></a>
 						        <a href = "{{route('admin.user.update', ['id'])}}"><li>Update User</li></a>
-						        <a href = ""><li>Add Categories</li></a>
-						        <a href = ""><li>Add Product</li></a>
-						        <a href = ""><li>List Product</li></a>
+						        <a href = "{{route('admin.category.create')}}"><li>Add Categories</li></a>
+						        <a href = "{{route('admin.category.show')}}"><li>List Cat</li></a>
+						        <a href = "{{route('admin.product.create')}}"><li>Add Product</li></a>
+						        <a href = "{{route('admin.product.show')}}"><li>List Product</li></a>
 					        </ul>
 					</div>
 					<div class="col">

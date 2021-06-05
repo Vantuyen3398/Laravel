@@ -5,7 +5,7 @@
     	<form id="contactform" action="{{route('admin.user.update', ['id' => $data['id']])}}" method="post" enctype="multipart/form-data"> 
     		@csrf
     		<p class="contact"><label for="name">Name</label></p> 
-    		<input id="name" name="name" placeholder="First and last name"  tabindex="1" type="text" value="{{$data['name']}}">
+    		<input id="name" name="name" placeholder="First and last name"  tabindex="1" type="text" value="{{$data['name']}}"><br>
             @if ($errors->has('name'))
                 <span class="has-error">
                     <strong>{{$errors->first('name')}}</strong>
