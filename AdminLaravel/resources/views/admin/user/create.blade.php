@@ -53,8 +53,8 @@
 
     		<p class="contact"><label for="img">Role</label></p>
     		<select name="role" class="form-control">
-                <option value="admin">Admin</option>
-                <option value="customer">Customer</option>
+                <option value="1">Admin</option>
+                <option value="0">Customer</option>
             </select>
             <input class="buttom" name="submit" id="submit" tabindex="5" value="Register" type="submit"> 	 
    		</form> 

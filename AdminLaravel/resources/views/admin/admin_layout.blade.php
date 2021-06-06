@@ -32,7 +32,13 @@
 						<div class="menu_right">
 							<ul>
 								<a href = "{{route('admin.user.create')}}"><li>Register</li></a>
-								<a href = ""><li>Login</li></a>
+								<a href = "{{route('admin.showLogin')}}">
+									<li>
+										@if (Auth::check())
+											Logout : {{Auth::User()->username}}
+										@endif
+									</li>
+								</a>
 							</ul>
 						</div>
 					</div>

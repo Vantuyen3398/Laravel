@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\CategoriesController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\AdminLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,9 @@ use App\Http\Controllers\Backend\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('admin/admin_layout');
-});
+Route::get('/', [AdminLoginController::class, 'showLogin'])->name('admin.showLogin');
+Route::post('/', [AdminLoginController::class, 'login'])->name('admin.login');
+
 Route::prefix('admin/user')->group(function() {
 	Route::get('create', [UserController::class, 'create'])->name('admin.user.create');
 	Route::post('create', [UserController::class, 'store'])->name('admin.user.store');
