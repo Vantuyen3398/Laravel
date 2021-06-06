@@ -38,4 +38,6 @@ Route::prefix('admin/product')->group(function() {
 	Route::post('create', [ProductController::class, 'store'])->name('admin.product.store');
 	Route::get('list_pd', [ProductController::class, 'show'])->name('admin.product.show');
 	Route::get('delete/{product_id}', [ProductController::class, 'destroy'])->name('admin.product.destroy');
+	Route::get('edit/{product_id}',[ProductController::class, 'edit'])->name('admin.product.edit');
+	Route::post('edit',[ProductController::class, 'update'])->name('admin.product.update');
 });

@@ -25,6 +25,7 @@
 						        <a href = "{{route('admin.category.show')}}"><li>List Cat</li></a>
 						        <a href = "{{route('admin.product.create')}}"><li>Add Product</li></a>
 						        <a href = "{{route('admin.product.show')}}"><li>List Product</li></a>
+						        <a href = "{{route('admin.product.update', ['id'])}}"><li>Update Product</li></a>
 					        </ul>
 					</div>
 					<div class="col">

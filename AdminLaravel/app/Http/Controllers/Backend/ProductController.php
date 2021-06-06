@@ -93,9 +93,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($product_id)
     {
-        //
+        $cate = DB::table('categories')->orderby('cat_id','asc')->get();
+        $data = Products::find($product_id);
+        return view('admin.product.edit')->with('data',$data)->with('cate',$cate);
     }
 
     /**
@@ -105,9 +107,41 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if ($request -> isMethod('post')) {
+            $validator = Validator::make($request->all(),[
+                'product_name'=>'required|max:255',
+                'price'=>'required|max:255',
+                'image'=>'image|mimes:jpg,jpeg,png,gif|mimetypes:image/jpg,image/jpeg,image/png,image/gif|max:10000',
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()
+                                 ->withErrors($validator)
+                                 ->withInput();
+            }
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $destination_Path = public_path('backend/images/product');
+                $file_name = time().'_'.$file->getClientOriginalName(); 
+                $file->move($destination_Path, $file_name);
+
+                $data = Products::find($request->id);
+                $data->product_name = $request->product_name;
+                $data->cat_id = $request->cat_id;
+                $data->price = $request->price;
+                $data->image = $file_name;
+                $data->save();
+                return redirect()->route('admin.product.show')->with('message','Update Product SuccessFully!');
+            } else {
+                $data = Products::find($request->id);
+                $data->product_name = $request->product_name;
+                $data->cat_id = $request->cat_id;
+                $data->price = $request->price;
+                $data->save();
+                return redirect()->route('admin.product.show')->with('message','Update Product SuccessFully!');
+            }
+        }
     }
 
     /**
